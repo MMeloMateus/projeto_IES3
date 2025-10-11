@@ -5,9 +5,6 @@ import java.sql.*;
 
 public abstract class BasePessoaDAO {
 
-    // Método Abstrato a ser implementado
-    protected abstract String getTabela();
-
     // Gravar
     public int incluirPessoa(Pessoa pessoa) throws SQLException {
 
@@ -38,35 +35,37 @@ public abstract class BasePessoaDAO {
         }
     }
 
-    // Consultar Geral - Retorna um objeto do tipo pessoa
-    // TODO
-    // Modificar para Array
-    public Pessoa consultarPessoaGeral(Pessoa pessoa) throws SQLException {
+    // Consultar Geral - Consulta todas as pessoa
+    // Obs: Vai dar ruim... Eu tô avisando... Isso não vai ser escalável...
+    public List<Pessoa> consultarPessoaGeral() throws SQLException {
 
-        String sql = "SELECT *  FROM PESSOAS WHERE pessoa_id = ?";
+        List<Pessoa> listaPessoas = new ArrayList<>();
+
+        String sql = "SELECT *  FROM PESSOAS ";
 
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, pessoa.getId());
-
-            try (ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
                 // cursor mostra a linha n-1
-                if (rs.next()) {
+                while (rs.next()) {
                     Pessoa p = new Pessoa();
                     p.setId(rs.getInt("pessoa_id"));
                     p.setNome(rs.getString("pessoa_nome"));
                     p.setCpf(rs.getString("pessoa_cpf"));
                     p.setEmail(rs.getString("pessoa_email"));
                     p.setTelefone(rs.getString("pessoa_telefone"));
-                    Date d = rs.getDate("pessoa_data_nasc");
-                    return p;
+
+                    //Conversão de Data
+                    p.setDataNasc(rs.getDate("pessoa_data_nasc") == null ? null : new java.util.Date(rs.getDate("pessoa_data_nasc").getTime()));
+
+                    // Adiciona a pessoa
+                    listaPessoas.add(p);
                 }
-                return null;
+                return listaPessoas;
             }
         }
-    }
+
 
     // Consultar por CPF - Retorna um objeto do tipo pessoa
     public Pessoa consultarPessoaCpf(int cpf) throws SQLException {
