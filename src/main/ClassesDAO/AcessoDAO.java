@@ -19,7 +19,7 @@ public class AcessoDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, acesso.getLocId());
             stmt.setInt(2, acesso.getPesId());
@@ -41,13 +41,6 @@ public class AcessoDAO {
             return affectedRows;
         }
     }
-
-    @Deprecated
-    // Atualizar - Retorna boolean
-//    public void atualizarAcesso(Acesso acesso) throws SQLException {
-//        // Não faz sentido poder atualizar um acesso...
-//        // Temos que discutir, não quero o FBI me acusando de abrigar o PocketNaro ou Mrs. Squid...
-//    }
 
     // Consultar
     public Acesso consultarAcesso(Acesso acesso) throws SQLException {
@@ -165,12 +158,4 @@ public class AcessoDAO {
             }
         }
     }
-
-//    @Deprecated
-//    // Deletar - Retorna boolean
-//    public void deletarAcesso(Acesso acesso) throws SQLException {
-//        // Não faz sentido poder deletar um acesso...
-//        // Temos que discutir, não quero o FBI me acusando de abrigar o PocketNaro ou Mrs. Squid...
-//    }
-
 }

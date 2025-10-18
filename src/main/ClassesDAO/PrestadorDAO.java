@@ -8,15 +8,18 @@ public class PrestadorDAO extends PessoaDAO {
     // Gravar
     public int incluirPrestador(Prestador prestador) throws SQLException {
 
-        String sql = "INSERT INTO PRESTADORES (prestador_cnpj, prestador_empresa, prestador_id) VALUES (?,?,?)";
+        int prestador_id = super.incluirPessoa(prestador);
+
+        String sql = "INSERT INTO PRESTADORES (prestador_id, prestador_cnpj, prestador_empresa, prestador_id) VALUES (?,?,?,?)";
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, prestador.getCnpj());
-            stmt.setString(2, prestador.getEmpresa());
-            stmt.setInt(3, prestador.getId());
+            stmt.setInt(1,prestador_id);
+            stmt.setString(2, prestador.getCnpj());
+            stmt.setString(3, prestador.getEmpresa());
+            stmt.setInt(4, prestador.getId());
 
             // Linha afetada pela ação
             int affectedRows = stmt.executeUpdate();
@@ -27,7 +30,6 @@ public class PrestadorDAO extends PessoaDAO {
                     return rs.getInt(1); // id gerado
                 }
             }
-
             // Retornar a linha afetada pela ação
             return affectedRows;
         }
@@ -60,6 +62,8 @@ public class PrestadorDAO extends PessoaDAO {
     // Atualizar - Retorna boolean
     public boolean atualizarPrestador(Prestador prestador) throws SQLException {
 
+        super.atualizarPessoa(prestador);
+
         String sql = "UPDATE PRESTADORES SET prestador_cnpj=?, prestador_empresa=? WHERE prestador_id=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
@@ -75,14 +79,18 @@ public class PrestadorDAO extends PessoaDAO {
 
     // Deletar - Retorna boolean
     public boolean deletarPrestador(Prestador prestador) throws SQLException {
-        String sql = "DELETE * FROM PRESTADORES WHERE prestador_id = ?";
-        try (Connection conn = ConnectionFactory.getConnection();
 
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        super.deletarPessoa(prestador);
+        return true;
 
-            stmt.setInt(1, prestador.getId());
-
-            return stmt.executeUpdate() > 0;
-        }
+//        String sql = "DELETE FROM PRESTADORES WHERE prestador_id = ?";
+//        try (Connection conn = ConnectionFactory.getConnection();
+//
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//
+//            stmt.setInt(1, prestador.getId());
+//
+//            return stmt.executeUpdate() > 0;
+//        }
     }
 }

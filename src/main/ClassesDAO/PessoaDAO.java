@@ -8,13 +8,13 @@ import java.util.List;
 public class PessoaDAO {
 
     // Gravar
-    public int incluirPessoa(Pessoa pessoa) throws SQLException {
+    protected int incluirPessoa(Pessoa pessoa) throws SQLException {
 
         String sql = "INSERT INTO PESSOAS (pessoa_nome, pessoa_cpf, pessoa_email, pessoa_telefone, pessoa_data_nasc) VALUES (?,?,?,?,?)";
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getCpf());
@@ -164,7 +164,7 @@ public class PessoaDAO {
     }
 
     // Atualizar - Retorna boolean
-    public boolean atualizarPessoa(Pessoa pessoa) throws SQLException {
+    protected boolean atualizarPessoa(Pessoa pessoa) throws SQLException {
 
         String sql = "UPDATE PESSOAS SET pessoa_nome=?, pessoa_cpf=?, pessoa_email=?, pessoa_telefone=?, pessoa_data_nasc=? WHERE pessoa_id=?";
 
@@ -184,13 +184,33 @@ public class PessoaDAO {
 
     // Deletar - Retorna boolean
     public boolean deletarPessoa(Pessoa pessoa) throws SQLException {
-        String sql = "DELETE * FROM PESSOAS WHERE pessoa_id = ?";
+
+        String sql = "UPDATE PESSOAS SET pessoa_ativa = false WHERE pessoa_id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, pessoa.getId());
+            return stmt.executeUpdate() > 0;
+        }
+
+//        String sql = "DELETE FROM PESSOAS WHERE pessoa_id = ?";
+//        try (Connection conn = ConnectionFactory.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//
+//            stmt.setInt(1,pessoa.getId());
+//            return stmt.executeUpdate() > 0;
+//        }
+    }
+
+    public boolean reincluirPessoa(Pessoa pessoa) throws SQLException{
+        String sql = "UPDATE PESSOAS SET pessoa_ativa = true WHERE pessoa_id = ?";
+
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1,pessoa.getId());
+            stmt.setInt(1, pessoa.getId());
             return stmt.executeUpdate() > 0;
         }
     }
-
 }

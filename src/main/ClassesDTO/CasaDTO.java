@@ -1,19 +1,20 @@
-package ClassesPuras;
+package ClassesDTO;
 
-public class Casa {
+public class CasaDTO{
     private int id;
     private String endereco;
 
-    public Casa(String endereco){
+    public CasaDTO(String endereco){
         this.endereco = endereco;
     }
 
-    public Casa(int id, String endereco) {
+    public CasaDTO(int id, String endereco) {
         this(endereco);
         this.id = id;
     }
 
-    public Casa() {}
+    public CasaDTO() {
+    }
 
     public int getId() {
         return id;
@@ -33,7 +34,7 @@ public class Casa {
 
     @Override
     public String toString() {
-        return "Casa{" +
+        return "CasaDTO{" +
                 "id=" + id +
                 ", endereco='" + endereco + '\'' +
                 '}';

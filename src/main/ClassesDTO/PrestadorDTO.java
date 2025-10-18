@@ -1,24 +1,24 @@
-package ClassesPuras;
+package ClassesDTO;
 
 import java.util.Date;
 
-public class Prestador extends Pessoa {
+public class PrestadorDTO extends PessoaDTO {
     private String cnpj;
     private String empresa;
 
-    public Prestador(String nome, String cpf, Date dataNasc, String telefone, String email, String cnpj, String empresa) {
+    public PrestadorDTO(String nome, String cpf, Date dataNasc, String telefone, String email, String cnpj, String empresa) {
         super(nome, cpf, dataNasc, telefone, email);
         this.cnpj = cnpj;
         this.empresa = empresa;
     }
 
-    public Prestador(int id, String nome, String cpf, Date dataNasc, String telefone, String email, boolean ativa, String cnpj, String empresa) {
+    public PrestadorDTO(int id, String nome, String cpf, Date dataNasc, String telefone, String email, boolean ativa, String cnpj, String empresa) {
         super(id, nome, cpf, dataNasc, telefone, email, ativa);
         this.cnpj = cnpj;
         this.empresa = empresa;
     }
 
-    public Prestador() {
+    public PrestadorDTO() {
     }
 
     public String getCnpj() {
@@ -39,8 +39,7 @@ public class Prestador extends Pessoa {
 
     @Override
     public String toString() {
-        return  super.toString() +
-                "Prestador{" +
+        return "PrestadorDTO{" +
                 "cnpj='" + cnpj + '\'' +
                 ", empresa='" + empresa + '\'' +
                 '}';

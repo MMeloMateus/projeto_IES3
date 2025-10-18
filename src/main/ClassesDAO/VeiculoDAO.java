@@ -14,7 +14,7 @@ public class VeiculoDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, veiculo.getPlaca());
             stmt.setInt(2, veiculo.getPesId());
@@ -159,7 +159,7 @@ public class VeiculoDAO {
 
     // Deletar
     public boolean deletarVeiculo(Veiculo veiculo) throws SQLException {
-        String sql = "DELETE * FROM VEICULOS WHERE vei_placa = ?";
+        String sql = "DELETE FROM VEICULOS WHERE vei_placa = ?";
         try (Connection conn = ConnectionFactory.getConnection();
 
              PreparedStatement stmt = conn.prepareStatement(sql)) {

@@ -1,28 +1,24 @@
-package ClassesPuras;
+package ClassesDTO;
 
-public class Autorizacao {
+public class AutorizacaoDTO {
     private int id;
     private int pesId;
     private int locId;
     private int autorizacao;
 
-    public Autorizacao(int pesId, int locId, int autorizacao) {
+    public AutorizacaoDTO(int pesId, int locId, int autorizacao) {
         this.pesId = pesId;
         this.locId = locId;
         this.autorizacao = autorizacao;
     }
 
-    public Autorizacao(int id,int pesId, int locId, int autorizacao ){
+    public AutorizacaoDTO(int id,int pesId, int locId, int autorizacao ){
         this(pesId,locId,autorizacao);
         this.id = id;
     }
 
-    public Autorizacao() {
+    public AutorizacaoDTO() {
     }
-
-    public int getId(){return id;}
-
-    public void setId(int id){this.id = id;}
 
     public int getPesId() {
         return pesId;
@@ -50,7 +46,7 @@ public class Autorizacao {
 
     @Override
     public String toString() {
-        return "Autorizacao{" +
+        return "AutorizacaoDTO{" +
                 "id=" + id +
                 ", pesId=" + pesId +
                 ", locId=" + locId +

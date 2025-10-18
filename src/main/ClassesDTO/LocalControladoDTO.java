@@ -1,19 +1,19 @@
-package ClassesPuras;
+package ClassesDTO;
 
-public class LocalControlado {
+public class LocalControladoDTO {
 
     private int id;
     private String nome;
 
-    public LocalControlado(String nome){
+    public LocalControladoDTO(String nome){
         this.nome = nome;
     }
-    public LocalControlado(int id, String nome) {
+    public LocalControladoDTO(int id, String nome) {
         this(nome);
         this.id = id;
     }
 
-    public LocalControlado(){}
+    public LocalControladoDTO(){};
 
     public int getId() {
         return id;
@@ -33,7 +33,7 @@ public class LocalControlado {
 
     @Override
     public String toString() {
-        return "LocalControlado{" +
+        return "LocalControladoDTO{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';

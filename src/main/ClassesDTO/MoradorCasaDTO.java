@@ -1,33 +1,26 @@
-package ClassesPuras;
+package ClassesDTO;
 
 import Util.TipoVinculo;
 
-public class MoradorCasa {
+public class MoradorCasaDTO {
     private int id;
     private int moradorId;
     private int casaId;
     private TipoVinculo tipoVinculo;
 
-    public MoradorCasa(int moradorId, int casaId, TipoVinculo tipoVinculo) {
+    public MoradorCasaDTO(int moradorId, int casaId, TipoVinculo tipoVinculo) {
         this.moradorId = moradorId;
         this.casaId = casaId;
         this.tipoVinculo = tipoVinculo;
     }
 
-    public MoradorCasa(int id,int moradorId, int casaId, TipoVinculo tipoVinculo){
+    public MoradorCasaDTO(int id,int moradorId, int casaId, TipoVinculo tipoVinculo){
         this(moradorId,casaId,tipoVinculo);
         this.id = id;
     }
 
-    public MoradorCasa(){}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    public MoradorCasaDTO(){
+    };
 
     public int getMoradorId() {
         return moradorId;
@@ -55,7 +48,7 @@ public class MoradorCasa {
 
     @Override
     public String toString() {
-        return "MoradorCasa{" +
+        return "MoradorCasaDTO{" +
                 "id=" + id +
                 ", moradorId=" + moradorId +
                 ", casaId=" + casaId +

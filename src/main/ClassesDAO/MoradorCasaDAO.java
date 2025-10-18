@@ -18,7 +18,7 @@ public class MoradorCasaDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, moradorCasa.getMoradorId());
             stmt.setInt(2, moradorCasa.getCasaId());
@@ -150,7 +150,7 @@ public class MoradorCasaDAO {
 
     // Deletar - Retorna boolean
     public boolean deletarMoradorCasa(MoradorCasa moradorCasa) throws SQLException {
-        String sql = "DELETE * FROM MORADOR_CASA WHERE morador_Id = ? and casa_id=? ";
+        String sql = "DELETE FROM MORADOR_CASA WHERE morador_Id = ? and casa_id=? ";
         try (Connection conn = ConnectionFactory.getConnection();
 
              PreparedStatement stmt = conn.prepareStatement(sql)) {

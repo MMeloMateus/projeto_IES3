@@ -5,18 +5,20 @@ import ClassesPuras.Visitante;
 import java.sql.*;
 import java.time.LocalDate;
 
-public class VisitanteDAO {
+public class VisitanteDAO extends PessoaDAO  {
 
     // Gravar
     public int incluirVisitante(Visitante visitante, Morador morador) throws SQLException {
 
-        String sql = "INSERT INTO + VISITANTES (pessoa_id, morador_id, visit_data_autorizacao) VALUES (?, ?, ?)";
+        int visitante_id = super.incluirPessoa(visitante);
+
+        String sql = "INSERT INTO + VISITANTES (visitante_id, morador_id, visit_data_autorizacao) VALUES (?, ?, ?)";
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, visitante.getId());
+            stmt.setInt(1, visitante_id);
             stmt.setInt(2, morador.getId());
             stmt.setDate(3, Date.valueOf(LocalDate.now()));
 
@@ -38,7 +40,7 @@ public class VisitanteDAO {
     // Consultar com base no Visitante
     public Visitante consultarVisitante(Visitante visitante) throws SQLException {
 
-        String sql = "SELECT * FROM VISITANTES WHERE pessoa_id = ?";
+        String sql = "SELECT * FROM VISITANTES WHERE visitante_id = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -50,7 +52,7 @@ public class VisitanteDAO {
                 // cursor mostra a linha n-1
                 if (rs.next()) {
                     Visitante v = new Visitante();
-                    v.setId(rs.getInt("pessoa_id"));
+                    v.setId(rs.getInt("visitante_id"));
                     return v;
                 }
                 return null;
@@ -108,7 +110,9 @@ public class VisitanteDAO {
     // Atualizar
     public boolean atualizarVisitante(Visitante visitante, Morador morador) throws SQLException {
 
-        String sql = "UPDATE VISITANTES SET morador_id=? WHERE pessoa_id=?";
+        super.atualizarPessoa(visitante);
+
+        String sql = "UPDATE VISITANTES SET morador_id=? WHERE visitante_id=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -122,15 +126,18 @@ public class VisitanteDAO {
 
     // Deletar - Retorna boolean
     public boolean deletarVisitante(Visitante visitante) throws SQLException {
-        String sql = "DELETE * FROM VISITANTES WHERE pessoa_id = ?";
-        try (Connection conn = ConnectionFactory.getConnection();
 
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, visitante.getId());
-
-            return stmt.executeUpdate() > 0;
-        }
+        super.deletarPessoa(visitante);
+        return true;
+//        String sql = "DELETE FROM VISITANTES WHERE visitante_id = ?";
+//        try (Connection conn = ConnectionFactory.getConnection();
+//
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//
+//            stmt.setInt(1, visitante.getId());
+//
+//            return stmt.executeUpdate() > 0;
+//        }
     }
 
 }

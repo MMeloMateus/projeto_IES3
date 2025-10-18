@@ -16,7 +16,7 @@ public class AutorizacaoDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, autorizacao.getPesId());
             stmt.setInt(2, autorizacao.getLocId());
@@ -58,7 +58,7 @@ public class AutorizacaoDAO {
     // Deletar - Retorna boolean
     public boolean deletarAutorizacao(Autorizacao autorizacao, LocalControlado locaisControlados,Pessoa pessoa) throws SQLException {
 
-        String sql = "DELETE * FROM AUTORIZACOES WHERE pessoa_id=? AND local_id=?";
+        String sql = "DELETE FROM AUTORIZACOES WHERE pessoa_id=? AND local_id=?";
 
         try (Connection conn = ConnectionFactory.getConnection();
 

@@ -13,7 +13,7 @@ public class CasaDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, casa.getEndereco());
 
@@ -58,7 +58,7 @@ public class CasaDAO {
 
     // Deletar - Retorna boolean
     public boolean deletarCasa(Casa casa) throws SQLException {
-        String sql = "DELETE * FROM CASAS WHERE casa_id=? ";
+        String sql = "DELETE FROM CASAS WHERE casa_id=? ";
         try (Connection conn = ConnectionFactory.getConnection();
 
              PreparedStatement stmt = conn.prepareStatement(sql)) {

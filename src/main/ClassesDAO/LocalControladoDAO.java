@@ -14,7 +14,7 @@ public class LocalControladoDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, localControlado.getNome());
 
@@ -100,7 +100,7 @@ public class LocalControladoDAO {
     // Deletar - Retorna boolean
     public boolean deletarLocalControlado(LocalControlado localControlado) throws SQLException {
 
-        String sql = "DELETE * FROM LOCAIS_CONTROLADOS WHERE local_nome = ?";
+        String sql = "DELETE FROM LOCAIS_CONTROLADOS WHERE local_nome = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

@@ -1,10 +1,10 @@
-package ClassesPuras;
+package ClassesDTO;
 
 import Util.TipoAcesso;
 import Util.StatusAcesso;
 import java.sql.Timestamp;
 
-public class Acesso {
+public class AcessoDTO {
     private int id;
     private int pesId;
     private int locId;
@@ -12,7 +12,7 @@ public class Acesso {
     private TipoAcesso tipoAcesso;
     private StatusAcesso statusAcesso;
 
-    public Acesso(int pesId, int locId, Timestamp data, TipoAcesso tipoAcesso, StatusAcesso statusAcesso){
+    public AcessoDTO(int pesId, int locId, Timestamp data, TipoAcesso tipoAcesso, StatusAcesso statusAcesso){
         this.pesId = pesId;
         this.locId = locId;
         this.data = data;
@@ -20,12 +20,12 @@ public class Acesso {
         this.statusAcesso = statusAcesso;
     }
 
-    public Acesso(int id, int pesId, int locId, Timestamp data, TipoAcesso tipoAcesso, StatusAcesso statusAcesso) {
+    public AcessoDTO(int id, int pesId, int locId, Timestamp data, TipoAcesso tipoAcesso, StatusAcesso statusAcesso) {
         this(pesId, locId, data, tipoAcesso, statusAcesso);
         this.id = id;
     }
 
-    public Acesso() {
+    public AcessoDTO() {
     }
 
     public int getId() {
@@ -78,7 +78,7 @@ public class Acesso {
 
     @Override
     public String toString() {
-        return "Acesso{" +
+        return "AcessoDTO{" +
                 "id=" + id +
                 ", pesId=" + pesId +
                 ", locId=" + locId +

@@ -1,8 +1,8 @@
-package ClassesPuras;
+package ClassesDTO;
 
 import java.util.Date;
 
-public class Pessoa {
+public class PessoaDTO {
     private int id;
     private String nome;
     private String cpf;
@@ -11,13 +11,13 @@ public class Pessoa {
     private String email;
     private boolean ativa;
 
-    public Pessoa(int id, String nome, String cpf, Date dataNasc, String telefone, String email, boolean ativa) {
+    public PessoaDTO(int id, String nome, String cpf, Date dataNasc, String telefone, String email, boolean ativa) {
         this(nome,cpf,dataNasc,telefone,email);
         this.id = id;
         this.ativa = ativa;
     }
 
-    public Pessoa(String nome, String cpf, Date dataNasc, String telefone, String email){
+    public PessoaDTO(String nome, String cpf, Date dataNasc, String telefone, String email){
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
@@ -25,7 +25,7 @@ public class Pessoa {
         this.email = email;
     }
 
-    public Pessoa(){}
+    public PessoaDTO(){};
 
     public int getId() {
         return id;
@@ -77,7 +77,7 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
+        return "PessoaDTO{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +

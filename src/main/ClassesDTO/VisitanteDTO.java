@@ -1,23 +1,24 @@
-package ClassesPuras;
+package ClassesDTO;
 
 import java.util.Date;
 
-public class Visitante extends Pessoa {
+public class VisitanteDTO extends PessoaDTO {
     private int morCadastraId;
     private Date dataAutorizacao;
 
-    public Visitante(String nome, String cpf, Date dataNasc, String telefone, String email, int morCadastraId, Date dataAutorizacao){
+    public VisitanteDTO(String nome, String cpf, Date dataNasc, String telefone, String email, int morCadastraId, Date dataAutorizacao){
         super(nome, cpf, dataNasc, telefone, email);
         this.morCadastraId = morCadastraId;
         this.dataAutorizacao = dataAutorizacao;
     }
 
-    public Visitante(int id, String nome, String cpf, Date dataNasc, String telefone, String email, boolean ativa, int morCadastraId, Date dataAutorizacao) {
+    public VisitanteDTO(int id, String nome, String cpf, Date dataNasc, String telefone, String email, boolean ativa, int morCadastraId, Date dataAutorizacao) {
         super(id, nome, cpf, dataNasc, telefone, email, ativa);
         this.morCadastraId = morCadastraId;
         this.dataAutorizacao = dataAutorizacao;
     }
-    public Visitante(){}
+
+    public VisitanteDTO(){}
 
     public int getMorCadastraId() {
         return morCadastraId;
@@ -38,7 +39,7 @@ public class Visitante extends Pessoa {
     @Override
     public String toString() {
         return super.toString() +
-                "Visitante{" +
+                "VisitanteDTO{" +
                 "morCadastraId=" + morCadastraId +
                 ", dataAutorizacao=" + dataAutorizacao +
                 '}';

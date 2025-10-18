@@ -16,7 +16,7 @@ public class ServicoDAO {
 
         // Abre e fecha o conector
         try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, servico.getMorId());
             stmt.setInt(2, servico.getPrestId());
@@ -156,7 +156,7 @@ public class ServicoDAO {
 
     // Deletar - Retorna boolean
     public boolean deletarServico(Servico servico) throws SQLException {
-        String sql = "DELETE * FROM SERVICOS WHERE serv_id = ?";
+        String sql = "DELETE FROM SERVICOS WHERE serv_id = ?";
         try (Connection conn = ConnectionFactory.getConnection();
 
              PreparedStatement stmt = conn.prepareStatement(sql)) {

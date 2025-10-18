@@ -1,8 +1,8 @@
-package ClassesPuras;
+package ClassesDTO;
 
 import java.util.Date;
 
-public class Servico {
+public class ServicoDTO {
     private int id;
     private int morId;
     private int prestId;
@@ -10,7 +10,7 @@ public class Servico {
     private Date dataInicio;
     private Date dataFim;
 
-    public Servico(int morId, int prestId, String servTipo, Date dataInicio, Date dataFim){
+    public ServicoDTO(int morId, int prestId, String servTipo, Date dataInicio, Date dataFim){
         this.morId = morId;
         this.prestId = prestId;
         this.servTipo = servTipo;
@@ -18,12 +18,12 @@ public class Servico {
         this.dataFim = dataFim;
     }
 
-    public Servico(int id, int morId, int prestId, String servTipo, Date dataInicio, Date dataFim) {
+    public ServicoDTO(int id, int morId, int prestId, String servTipo, Date dataInicio, Date dataFim) {
         this(morId,prestId,servTipo,dataInicio,dataFim);
         this.id = id;
     }
 
-    public Servico() {
+    public ServicoDTO() {
     }
 
     public int getId() {
@@ -76,7 +76,7 @@ public class Servico {
 
     @Override
     public String toString() {
-        return "Servico{" +
+        return "ServicoDTO{" +
                 "id=" + id +
                 ", morId=" + morId +
                 ", prestId=" + prestId +
